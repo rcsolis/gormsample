@@ -1,7 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"net/http"
+
+	"github.com/gorilla/mux"
+	"github.com/rcsolis/gormsample/internal/routes"
+)
 
 func main() {
-	fmt.Println("Hello World")
+	// Create router
+	router := mux.NewRouter()
+	// Route handlers
+	router.HandleFunc("/api/v1/", routes.IndexHandler).Methods("GET")
+
+	// Start server
+	http.ListenAndServe(":5000", router)
 }
